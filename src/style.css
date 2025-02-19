@@ -1,0 +1,15 @@
+/* Ejemplo para sobrescribir el color principal */
+.btn-primary {
+  background-color: #ff5722 !important;
+  border-color: #ff5722 !important;
+}
+
+/* Cambiar el color de fondo del body */
+body {
+  background-color: #f8f9fa;
+}
+
+/* Cambiar el color de enlaces */
+a {
+  color: #ff5722;
+}

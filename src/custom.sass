@@ -1,0 +1,22 @@
+
+// Define tus colores verdes personalizados
+$primary: #04593A;         // Un verde oscuro para el color principal
+$secondary: #07734B;       // Un tono verde secundario
+$success: #28a745;         // Verde para mensajes de éxito (puedes ajustarlo a tu gusto)
+$body-bg: #e9f7ef;         // Un fondo muy claro con tonalidad verde
+$link-color: $primary;     // Los enlaces usarán el color primary
+
+.bg-custom 
+  background-color: $primary !important; // O el tono de verde que prefieras
+.carousel-item
+    img
+        width: 35%; // Reduce el tamaño al 35%
+        display: block; // Asegura que el margen funcione
+        margin: 0 auto; // Centra la imagen horizontalmente
+    
+
+// Puedes sobrescribir otras variables de Bootstrap si lo deseas
+// Por ejemplo, para los botones, formularios, etc.
+
+// Importa Bootstrap después de definir tus variables
+@import "bootstrap/scss/bootstrap";
