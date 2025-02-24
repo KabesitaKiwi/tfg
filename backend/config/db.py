@@ -1,5 +1,9 @@
 import mysql.connector
+import os
 from mysql.connector import pooling
+from dotenv import load_dotenv
+
+load_dotenv()  # Cargar variables de entorno desde .env
 
 # Configuración del pool de conexiones
 db_config = {
@@ -9,26 +13,24 @@ db_config = {
     "password": "root",         # Contraseña del usuario
     "database": "tfg"       # Nombre de tu base de datos
 }
-
 # Crear el pool de conexiones
 try:
-    pool = pooling.MySQLConnectionPool(
-        pool_name="mypool",
-        pool_size=10,  # Límite de conexiones en el pool
-        **db_config
-    )
-    print("✅ Pool de conexiones MySQL creado correctamente.")
-except mysql.connector.Error as err:
-    print(f"❌ Error al crear el pool de conexiones: {err}")
+    connection_pool = pooling.MySQLConnectionPool(**db_config)
+    print("✅ Pool de conexiones creado correctamente")
+except mysql.connector.Error as e:
+    print(f"❌ Error al crear el pool de conexiones: {e}")
+    connection_pool = None
 
 # Función para obtener una conexión del pool
 def get_connection():
     try:
-        connection = pool.get_connection()
-        print("🔄 Conexión obtenida del pool")
-        return connection
-    except mysql.connector.Error as err:
-        print(f"❌ Error al obtener la conexión: {err}")
+        if connection_pool:
+            return connection_pool.get_connection()
+        else:
+            print("⚠️ Pool de conexiones no disponible")
+            return None
+    except mysql.connector.Error as e:
+        print(f"❌ Error al obtener una conexión: {e}")
         return None
 
 # Ejemplo de consulta
@@ -36,7 +38,7 @@ if __name__ == "__main__":
     conn = get_connection()
     if conn:
         cursor = conn.cursor()
-        cursor.execute("SHOW DATABASES;")
+        cursor.execute("SHOW TABLES;")
         for db in cursor.fetchall():
             print(db)
         cursor.close()

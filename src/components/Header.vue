@@ -69,24 +69,24 @@ export default {
 
     // Inicializar el modal de Bootstrap al montar el componente
     onMounted(() => {
-      const modalElement = document.getElementById('loginModal')
-      modalInstance = new bootstrap.Modal(modalElement, {})
+      const modalElement = document.getElementById('loginModal');
+      modalInstance = new bootstrap.Modal(modalElement, {});
     })
 
     const toggleLoginModal = () => {
-      modalInstance.show()
+      modalInstance.show();
     }
 
     const handleLogin = () => {
       console.log('Iniciando sesión con:', username.value, password.value)
       // Aquí podrías integrar la lógica de autenticación vía API
-      modalInstance.hide()
+      modalInstance.hide();
     }
 
     const handleRegister = () => {
-      console.log('Acción de registro')
+      console.log('Acción de registro');
       // Aquí podrías redireccionar a una página de registro o mostrar otro modal
-      modalInstance.hide()
+      modalInstance.hide();
     }
 
     return {
