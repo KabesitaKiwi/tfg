@@ -11,7 +11,7 @@ db_config = {
     "port": 3309,              # Asegúrate de que es el puerto correcto
     "user": "root",            # Usuario de MySQL
     "password": "root",         # Contraseña del usuario
-    "database": "tfg"       # Nombre de tu base de datos
+    "database": "mi_tienda"       # Nombre de tu base de datos
 }
 # Crear el pool de conexiones
 try:

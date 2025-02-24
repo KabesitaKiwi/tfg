@@ -1,10 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config.db import get_connection  # Importamos la función correctamente
+from routes import auth_router
 
 app = FastAPI()
 
 # Configurar CORS para permitir peticiones del frontend
+app.include_router(auth_router)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  
