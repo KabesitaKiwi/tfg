@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysql:
+    container_name: mysql_tfg
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mi_tienda
+      MYSQL_USER: erwin
+      MYSQL_PASSWORD: erwinpass
+    ports:
+      - "3309:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    container_name: tfg-backend
+    build:
+      context: ./backend
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - mysql
+
+  frontend:
+    container_name: tfg-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm run dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:
